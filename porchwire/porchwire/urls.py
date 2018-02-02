@@ -21,6 +21,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
+
 # Initial REST API
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,9 +40,11 @@ router.register(r'users', UserViewSet)
 
 # URLS
 urlpatterns = [
+    path('', include('porchwireapp.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include(router.urls)),
 ]
 
 if settings.DEBUG:
